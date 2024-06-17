@@ -1,0 +1,177 @@
+openapi: 3.0.0
+info:
+  title: Flypass
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000
+tags:
+  - name: Customer
+  - name: Account
+  - name: Transaction
+paths:
+  /customer-api/v0/customers:
+    post:
+      tags:
+        - Customer
+      summary: Create Customer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                tipoIdentificacion: CEDULA
+                fechaNacimiento: '1997-03-19'
+                numeroIdentificacion: '11108580896'
+                nombres: orlando
+                apellidos: velasquez
+                correoElectronico: orlando@gmail.com
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /customer-api/v0/customers/1:
+    patch:
+      tags:
+        - Customer
+      summary: Update Customer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                nombres: orlando 2
+                apellidos: velasquez 2
+                correoElectronico: orlando2@gmail.com
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Customer
+      summary: Find Customer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Customer
+      summary: Delete Customer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /account-api/v0/accounts/8:
+    patch:
+      tags:
+        - Account
+      summary: Update Account status
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                estado: CANCELADA
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /account-api/v0/accounts:
+    post:
+      tags:
+        - Account
+      summary: Create account
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                tipoCuenta: CUENTA_CORRIENTE
+                exentaGMF: true
+                clienteId: 1
+                saldo: -12
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Account
+      summary: Find accounts by cliente id
+      parameters:
+        - name: clienteId
+          in: query
+          schema:
+            type: integer
+          example: '1'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /transaccion-api/v0/transactions/consignments:
+    post:
+      tags:
+        - Transaction
+      summary: Create Consignments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                monto: 900
+                cuentaDestino: 2
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /transaccion-api/v0/transactions/withdraws:
+    post:
+      tags:
+        - Transaction
+      summary: Create Withdraws
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                monto: 900
+                cuentaDestino: 2
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /transaccion-api/v0/transactions/transfers:
+    post:
+      tags:
+        - Transaction
+      summary: Create Transfer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                monto: 900
+                cuentaOrigen: 2
+                cuentaDestino: 3
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
